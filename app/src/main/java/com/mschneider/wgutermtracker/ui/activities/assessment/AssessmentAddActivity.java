@@ -49,7 +49,7 @@ public class AssessmentAddActivity extends AppCompatActivity {
                 updateLabel();
             }
         };
-        
+
 
 
         assessmentDueDateEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {

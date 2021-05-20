@@ -5,22 +5,18 @@
     android:gravity="center_vertical">
 
     <TextView
-        android:id="@+id/appointmentTitleTextView"
+        android:id="@+id/assessmentTypeTextView"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         />
 
     <TextView
-        android:id="@+id/appointmentTypeTextView"
+        android:id="@+id/assessmentDueDateTextView"
         android:layout_width="100dp"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/appointmentDateTextView"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/appointmentTimeTextView"
+        android:id="@+id/assessmentNotesTextView"
         android:layout_width="100dp"
         android:layout_height="wrap_content" />
 </LinearLayout>

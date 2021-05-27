@@ -25,14 +25,15 @@
         android:id="@+id/assessmentTypeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="181dp"
-        android:layout_marginEnd="336dp"
-        android:layout_marginBottom="531dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="166dp"
+        android:layout_marginEnd="339dp"
+        android:layout_marginBottom="546dp"
         android:text="Type:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/assessmentDueDateLabel"
@@ -132,8 +133,23 @@
         android:layout_marginTop="472dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="211dp"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="#2196F3"
         android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/backAssessmentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="472dp"
+        android:layout_marginEnd="282dp"
+        android:layout_marginBottom="211dp"
+        android:backgroundTint="#2196F3"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

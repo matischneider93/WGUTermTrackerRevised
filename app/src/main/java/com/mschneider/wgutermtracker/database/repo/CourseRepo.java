@@ -44,7 +44,7 @@ public class CourseRepo {
         return allCourses;
     }
 
-    public Course getCourseById(int courseId){
+    public Course getCourseById(Long courseId){
         return courseDao.getCourseById(courseId);
     }
 

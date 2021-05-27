@@ -47,9 +47,6 @@ public class AssessmentEditActivity extends AppCompatActivity {
                 if (assessmentDueDateEditText.getText().toString().isEmpty()){ assessmentDueDateEditText.setText(dueDate); }
                 if (assessmentNotesEditText.getText().toString().isEmpty()){ assessmentNotesEditText.setText(notes); }
 
-
-
-
                 Intent intent = new Intent(getApplicationContext(), AssessmentsActivity.class);
                 startActivity(intent);
             }

@@ -3,6 +3,7 @@ package com.mschneider.wgutermtracker.ui.activities.term;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -81,14 +82,10 @@ public class TermEditActivity extends AppCompatActivity {
         termEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (termTitleEditText.getText().toString().isEmpty()){ termTitleEditText.setText(title); }
-                if (termStartDateEditText.getText().toString().isEmpty()){ termStartDateEditText.setText(startDate); }
-                if (termEndDateEditText.getText().toString().isEmpty()){ termEndDateEditText.setText(endDate); }
-                Term newTerm = new Term(Long.valueOf(termId), termTitleEditText.getText().toString(),termStartDateEditText.getText().toString(), termEndDateEditText.getText().toString());
-                MainActivity.getAppDatabase().termDao().updateTerm(newTerm);
-                Intent intent = new Intent(getApplicationContext(), TermsActivity.class);
-                startActivity(intent);
-            }
+                    Intent intent = new Intent(getApplicationContext(), TermsActivity.class);
+                    startActivity(intent);
+                }
+
         });
     }
 

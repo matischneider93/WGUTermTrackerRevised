@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +19,7 @@ import com.mschneider.wgutermtracker.R;
 import com.mschneider.wgutermtracker.models.Assessment;
 import com.mschneider.wgutermtracker.models.Course;
 import com.mschneider.wgutermtracker.models.Term;
+import com.mschneider.wgutermtracker.ui.activities.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,12 +29,13 @@ import java.util.Locale;
 import static com.mschneider.wgutermtracker.ui.activities.MainActivity.appDatabase;
 
 public class AssessmentAddActivity extends AppCompatActivity {
-    private int  courseId;
+    private Long  courseId = 1L;
     private EditText assessmentTypeEditText;
     private EditText assessmentDueDateEditText;
     private EditText assessmentNotesEditText;
     private Button assessmentAddButton; // Add button
     private Button assessmentsBackButton; // Add button
+    private List<Course> courseList = new ArrayList<>();
     Calendar myCalendar = Calendar.getInstance();
 
 
@@ -42,7 +45,6 @@ public class AssessmentAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_assessment_add);
         Spinner spinner = findViewById(R.id.courseSpinner);
         List<Course> courses = appDatabase.courseDao().getAllCourses();
-        List<Course> courseList = new ArrayList<>();
         for (Course course : courses) {
             courseList.add(course);
         }
@@ -56,16 +58,17 @@ public class AssessmentAddActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String courseID = parent.getItemAtPosition(position).toString();
-                courseId = Integer.parseInt(courseID);
+                String termId = parent.getItemAtPosition(position).toString();
+                courseId = Long.valueOf(termId);
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                courseId = 1;
+                courseId = null;
             }
         });
+
         assessmentTypeEditText = findViewById(R.id.assessmentTypeEditText);
         assessmentDueDateEditText = findViewById(R.id.assessmentDueDateEditText);
         assessmentNotesEditText = findViewById(R.id.assessmentNotesEditText);
@@ -103,7 +106,9 @@ public class AssessmentAddActivity extends AppCompatActivity {
         assessmentAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Assessment assessment = new Assessment(Long.valueOf(1), assessmentTypeEditText.getText().toString(), assessmentDueDateEditText.getText().toString(), assessmentNotesEditText.getText().toString());
+                Assessment assessment = new Assessment(courseId, assessmentTypeEditText.getText().toString(), assessmentDueDateEditText.getText().toString(), assessmentNotesEditText.getText().toString());
+                appDatabase.assessmentDao().insertAssessment(assessment);
+                Log.i("Check", "Assessment inserted");
                 Intent intent = new Intent(getApplicationContext(), AssessmentsActivity.class);
                 startActivity(intent);
             }

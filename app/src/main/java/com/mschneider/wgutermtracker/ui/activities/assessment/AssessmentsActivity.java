@@ -2,6 +2,7 @@ package com.mschneider.wgutermtracker.ui.activities.assessment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mschneider.wgutermtracker.R;
 import com.mschneider.wgutermtracker.database.AppDatabase;
 import com.mschneider.wgutermtracker.models.Assessment;
+import com.mschneider.wgutermtracker.models.Course;
 import com.mschneider.wgutermtracker.ui.activities.MainActivity;
 import com.mschneider.wgutermtracker.ui.adapters.AssessmentAdapter;
+import com.mschneider.wgutermtracker.ui.adapters.CourseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +37,25 @@ public class AssessmentsActivity extends AppCompatActivity implements Assessment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessments);
         AppDatabase appDatabase = MainActivity.getAppDatabase();
-        List<Assessment> assessments = appDatabase.assessmentDao().getAllAssessments();
-        for (Assessment assessment : assessments){ assessmentList.add(assessment); }
-
+        List<Assessment> assessments = null;
         assessmentsRecyclerView = findViewById(R.id.assessmentsRecyclerView);
         assessmentsRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         assessmentsRecyclerView.setLayoutManager(layoutManager);
         assessmentsRecyclerView.setAdapter(new AssessmentAdapter(assessmentList, this));
+        if (appDatabase.assessmentDao().getAllAssessments().isEmpty()){
+            Log.d("Check", "Is Empty");
+        } else {
+            assessments = appDatabase.assessmentDao().getAllAssessments();
+            for (Assessment assessment : assessments){ assessmentList.add(assessment); }
+            assessmentsRecyclerView = findViewById(R.id.assessmentsRecyclerView);
+            assessmentsRecyclerView.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            assessmentsRecyclerView.setLayoutManager(layoutManager);
+            assessmentsRecyclerView.setAdapter(new AssessmentAdapter(assessmentList, this));
+        }
+
+
 
         // Button Connections
         assessmentAddButton = findViewById(R.id.assessmentAddButton);
@@ -84,6 +98,7 @@ public class AssessmentsActivity extends AppCompatActivity implements Assessment
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AssessmentDetailActivity.class);
                 intent.putExtra("assessment_id", assessmentList.get(selectedPosition).getAssessmentId());
+                intent.putExtra("course_id", assessmentList.get(selectedPosition).getCourseId());
                 intent.putExtra("assessment_type", assessmentList.get(selectedPosition).getAssessmentType());
                 intent.putExtra("due_date", assessmentList.get(selectedPosition).getDueDate());
                 intent.putExtra("notes", assessmentList.get(selectedPosition).getNotes());

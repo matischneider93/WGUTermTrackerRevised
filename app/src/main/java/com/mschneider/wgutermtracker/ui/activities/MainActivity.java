@@ -39,29 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         // when upgrading versions, kill the original tables by using fallbackToDestructiveMigration()
         appDatabase = AppDatabase.getDatabaseInstance(getApplicationContext());
-        appDatabase.termDao().deleteAllTerms();
-        appDatabase.termDao().insertTerm(new Term("Term A", "5/27/21", "5/31/21"));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        clearAppDatabases();
+        populateDatabases();
 
         termsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,9 +70,16 @@ public class MainActivity extends AppCompatActivity {
 
     // Function to clear app database entries
     private void clearAppDatabases() {
-        appDatabase.assessmentDao().deleteAllAssessments();
-        appDatabase.courseDao().deleteAllCourses();
-        appDatabase.termDao().deleteAllTerms();
+        if (appDatabase.assessmentDao().getAssessmentsCount() > 0){ appDatabase.assessmentDao().deleteAllAssessments(); }
+        if (appDatabase.courseDao().getCoursesCount() > 0){ appDatabase.courseDao().deleteAllCourses(); }
+        if (appDatabase.termDao().getTermCount() > 0){ appDatabase.termDao().deleteAllTerms(); }
+    }
+
+
+    private void populateDatabases() {
+        appDatabase.termDao().insertTerm(new Term( "Term A","06/01/2021", "06/30/2021"));
+        appDatabase.courseDao().insertCourse(new Course((long) 1,"Course A","06/01/2021", "06/30/2021", "Upcoming", "Barb Gilbert", "134253", "barb@gilbert.com", "n/a"));
+        appDatabase.assessmentDao().insertAssessment(new Assessment( (long) 1, (long) 1, "Objective","06/01/2021", "N/A" ));
     }
 
     public static AppDatabase getAppDatabase() {

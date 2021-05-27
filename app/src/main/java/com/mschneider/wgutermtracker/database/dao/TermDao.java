@@ -24,6 +24,8 @@ public interface TermDao {
     void updateTerm(Term term);
 
 
+
+
     @Delete
     void deleteTerms(Term term);
 

@@ -31,7 +31,7 @@ public interface TermDao {
     void deleteById(int id);
 
     @Query("SELECT * FROM terms WHERE termId = :termId")
-    Term getTermById(int termId);
+    Term getTermById(Long termId);
 
     @Query("SELECT * FROM terms ORDER BY termId ASC")
     List<Term> getAllTerms();
@@ -41,4 +41,7 @@ public interface TermDao {
 
     @Query("SELECT COUNT(*) FROM terms")
     int getTermCount();
+
+
+
 }

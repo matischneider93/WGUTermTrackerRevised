@@ -8,27 +8,13 @@
     tools:context=".ui.activities.assessment.AssessmentEditActivity">
 
     <TextView
-        android:id="@+id/assessmentCourseIdLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="305dp"
-        android:layout_marginBottom="605dp"
-        android:text="Course Id:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/assessmentTypeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="181dp"
-        android:layout_marginEnd="306dp"
-        android:layout_marginBottom="531dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="166dp"
+        android:layout_marginEnd="340dp"
+        android:layout_marginBottom="546dp"
         android:text="Type:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,21 +44,6 @@
         android:layout_marginEnd="334dp"
         android:layout_marginBottom="385dp"
         android:text="Notes:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/assessmentCourseIdUpdateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="594dp"
-        android:ems="10"
-        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

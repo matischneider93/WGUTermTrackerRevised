@@ -44,7 +44,7 @@ public class TermRepo {
         return allTerms;
     }
 
-    public Term getTermById(int termId){
+    public Term getTermById(Long termId){
         return termDao.getTermById(termId);
     }
 

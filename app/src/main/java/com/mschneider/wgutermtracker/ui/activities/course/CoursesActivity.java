@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.mschneider.wgutermtracker.R;
 import com.mschneider.wgutermtracker.database.AppDatabase;
@@ -32,19 +34,29 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
         AppDatabase appDatabase = MainActivity.getAppDatabase();
-        List<Course> courses = appDatabase.courseDao().getAllCourses();
-        for (Course course : courses){ coursesList.add(course); }
-
+        List<Course> courses = null;
         coursesRecyclerView = findViewById(R.id.coursesRecyclerView);
         coursesRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
         coursesRecyclerView.setLayoutManager(layoutManager);
         coursesRecyclerView.setAdapter(new CourseAdapter(coursesList, this));
 
+        if (appDatabase.courseDao().getAllCourses().isEmpty()){
+            Log.d("Check", "Is Empty");
+        } else {
+            courses = appDatabase.courseDao().getAllCourses();
+            for (Course course : courses){ coursesList.add(course); }
+            coursesRecyclerView = findViewById(R.id.coursesRecyclerView);
+            coursesRecyclerView.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+            coursesRecyclerView.setLayoutManager(layoutManager);
+            coursesRecyclerView.setAdapter(new CourseAdapter(coursesList, this));
+        }
+
+
         // Button Connections
         courseAddButton = findViewById(R.id.courseAddButton);
-        courseEditButton = findViewById(R.id.courseUpdateButton);
+        courseEditButton = findViewById(R.id.courseEditButton);
         courseDetailButton = findViewById(R.id.courseDetailButton);
         courseDeleteButton = findViewById(R.id.courseDeleteButton);
 
@@ -68,16 +80,18 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
         courseEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), CourseEditActivity.class);
-                intent.putExtra("courseId", courses.get(selectedPosition).getCourseId());
-                intent.putExtra("termId", courses.get(selectedPosition).getTermId());
-                intent.putExtra("title", courses.get(selectedPosition).getTitle());
-                intent.putExtra("status", courses.get(selectedPosition).getStatus());
-                intent.putExtra("start_date", courses.get(selectedPosition).getStartDate());
-                intent.putExtra("end_date", courses.get(selectedPosition).getEndDate());
-                intent.putExtra("mentor_name", courses.get(selectedPosition).getMentorName());
-                intent.putExtra("mentor_phone", courses.get(selectedPosition).getMentorPhone());
-                intent.putExtra("mentor_email", courses.get(selectedPosition).getMentor_email());
+                intent.putExtra("courseId", coursesList.get(selectedPosition).getCourseId());
+                intent.putExtra("termId", coursesList.get(selectedPosition).getTermId());
+                intent.putExtra("title", coursesList.get(selectedPosition).getTitle());
+                intent.putExtra("status", coursesList.get(selectedPosition).getStatus());
+                intent.putExtra("start_date", coursesList.get(selectedPosition).getStartDate());
+                intent.putExtra("end_date", coursesList.get(selectedPosition).getEndDate());
+                intent.putExtra("mentor_name", coursesList.get(selectedPosition).getMentorName());
+                intent.putExtra("mentor_phone", coursesList.get(selectedPosition).getMentorPhone());
+                intent.putExtra("mentor_email", coursesList.get(selectedPosition).getMentor_email());
+                intent.putExtra("course_notes", coursesList.get(selectedPosition).getNotes());
                 startActivity(intent);
             }
         });
@@ -87,15 +101,16 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
-                intent.putExtra("courseId", courses.get(selectedPosition).getCourseId());
-                intent.putExtra("termId", courses.get(selectedPosition).getTermId());
-                intent.putExtra("title", courses.get(selectedPosition).getTitle());
-                intent.putExtra("status", courses.get(selectedPosition).getStatus());
-                intent.putExtra("start_date", courses.get(selectedPosition).getStartDate());
-                intent.putExtra("end_date", courses.get(selectedPosition).getEndDate());
-                intent.putExtra("mentor_name", courses.get(selectedPosition).getMentorName());
-                intent.putExtra("mentor_phone", courses.get(selectedPosition).getMentorPhone());
-                intent.putExtra("mentor_email", courses.get(selectedPosition).getMentor_email());
+                intent.putExtra("courseId", coursesList.get(selectedPosition).getCourseId());
+                intent.putExtra("termId", coursesList.get(selectedPosition).getTermId());
+                intent.putExtra("title", coursesList.get(selectedPosition).getTitle());
+                intent.putExtra("status", coursesList.get(selectedPosition).getStatus());
+                intent.putExtra("start_date", coursesList.get(selectedPosition).getStartDate());
+                intent.putExtra("end_date", coursesList.get(selectedPosition).getEndDate());
+                intent.putExtra("mentor_name", coursesList.get(selectedPosition).getMentorName());
+                intent.putExtra("mentor_phone", coursesList.get(selectedPosition).getMentorPhone());
+                intent.putExtra("mentor_email", coursesList.get(selectedPosition).getMentor_email());
+                intent.putExtra("notes", coursesList.get(selectedPosition).getNotes());
                 startActivity(intent);
             }
         });

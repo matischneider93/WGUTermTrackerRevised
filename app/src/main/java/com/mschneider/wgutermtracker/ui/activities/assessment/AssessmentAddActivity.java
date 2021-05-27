@@ -5,20 +5,29 @@ import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mschneider.wgutermtracker.R;
 import com.mschneider.wgutermtracker.models.Assessment;
+import com.mschneider.wgutermtracker.models.Course;
+import com.mschneider.wgutermtracker.models.Term;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
+import static com.mschneider.wgutermtracker.ui.activities.MainActivity.appDatabase;
+
 public class AssessmentAddActivity extends AppCompatActivity {
-    private EditText assessmentCourseIdEditText;
+    private int  courseId;
     private EditText assessmentTypeEditText;
     private EditText assessmentDueDateEditText;
     private EditText assessmentNotesEditText;
@@ -31,10 +40,35 @@ public class AssessmentAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_add);
-        assessmentCourseIdEditText = findViewById(R.id.assessmentCourseIdUpdateText);
+        Spinner spinner = findViewById(R.id.courseSpinner);
+        List<Course> courses = appDatabase.courseDao().getAllCourses();
+        List<Course> courseList = new ArrayList<>();
+        for (Course course : courses) {
+            courseList.add(course);
+        }
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (Course course : courseList) {
+            arrayList.add(String.valueOf(course.getCourseId()));
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String courseID = parent.getItemAtPosition(position).toString();
+                courseId = Integer.parseInt(courseID);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                courseId = 1;
+            }
+        });
         assessmentTypeEditText = findViewById(R.id.assessmentTypeEditText);
         assessmentDueDateEditText = findViewById(R.id.assessmentDueDateEditText);
-        assessmentNotesEditText = findViewById(R.id.assessmentCourseIdUpdateText);
+        assessmentNotesEditText = findViewById(R.id.assessmentNotesEditText);
         assessmentAddButton = findViewById(R.id.addAssessmentButton);
         assessmentsBackButton = findViewById(R.id.backAssessmentButton); // leads to main assessment screen
 
@@ -69,7 +103,7 @@ public class AssessmentAddActivity extends AppCompatActivity {
         assessmentAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Assessment assessment = new Assessment(1, assessmentTypeEditText.getText().toString(), assessmentDueDateEditText.getText().toString(), assessmentNotesEditText.getText().toString());
+                Assessment assessment = new Assessment(Long.valueOf(1), assessmentTypeEditText.getText().toString(), assessmentDueDateEditText.getText().toString(), assessmentNotesEditText.getText().toString());
                 Intent intent = new Intent(getApplicationContext(), AssessmentsActivity.class);
                 startActivity(intent);
             }

@@ -19,7 +19,7 @@ import com.mschneider.wgutermtracker.models.Term;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities={Course.class, Term.class, Assessment.class}, version=1 , exportSchema = false)
+@Database(entities={Course.class, Term.class, Assessment.class}, version=2 , exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "AppDatabase.db";
@@ -55,6 +55,7 @@ public abstract class AppDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             new PopulateDbAsyncTask(databaseInstance).execute();
+
         }
     };
 
@@ -70,6 +71,7 @@ public abstract class AppDatabase extends RoomDatabase {
             termDao = db.termDao();
             courseDao = db.courseDao();
             assessmentDao = db.assessmentDao();
+
 
         }
 

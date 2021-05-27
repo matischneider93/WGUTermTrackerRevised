@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.mschneider.wgutermtracker.models.Assessment;
+import com.mschneider.wgutermtracker.models.Course;
 
 import java.util.List;
 
@@ -26,10 +27,13 @@ public interface AssessmentDao {
     void deleteAssessment(Assessment assessment);
 
     @Query("SELECT * FROM ASSESSMENTS WHERE  assessment_id =:assessmentId")
-    Assessment getAssessmentById(int assessmentId);
+    Assessment getAssessmentById(Long assessmentId);
 
     @Query("SELECT * FROM assessments ORDER BY assessment_id ASC")
     List<Assessment> getAllAssessments();
+
+    @Query("SELECT * FROM courses WHERE courseId = :courseId")
+    List<Course> getAssessmentsByCourseId(Long courseId);
 
     @Query("DELETE FROM assessments")
     int deleteAllAssessments();
@@ -39,6 +43,9 @@ public interface AssessmentDao {
 
     @Query("DELETE FROM assessments WHERE  assessment_id =:selectedPosition")
     void deleteAssessment(int selectedPosition);
+
+
+
 
 
 }

@@ -8,10 +8,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "assessments")
 public class Assessment {
     @ColumnInfo(name = "assessment_id")
-    @PrimaryKey(autoGenerate = true)
-    private int assessmentId;
+    @PrimaryKey
+    private Long assessmentId;
     @ColumnInfo(name = "course_Id")
-    private int courseId;
+    private Long courseId;
     @ColumnInfo(name = "assessment_type")
     private String assessmentType;
     @ColumnInfo(name = "due_date")
@@ -22,7 +22,7 @@ public class Assessment {
 
 
     @Ignore
-    public Assessment(int assessmentId, int courseId, String assessmentType, String dueDate, String notes) {
+    public Assessment(Long assessmentId, Long courseId, String assessmentType, String dueDate, String notes) {
         this.assessmentId = assessmentId;
         this.courseId = courseId;
         this.assessmentType = assessmentType;
@@ -30,7 +30,7 @@ public class Assessment {
         this.notes = notes;
     }
     @Ignore
-    public Assessment(int courseId, String assessmentType, String dueDate, String notes) {
+    public Assessment(Long courseId, String assessmentType, String dueDate, String notes) {
         this.courseId = courseId;
         this.assessmentType = assessmentType;
         this.dueDate = dueDate;
@@ -50,17 +50,17 @@ public class Assessment {
 
 
     public Assessment() {
-        this.assessmentId = 1;
-        this.courseId = 1;
+        this.assessmentId = Long.valueOf(1);
+        this.courseId = Long.valueOf(1);
         this.assessmentType = "N/A";
         this.dueDate = "N/A";
         this.notes = "N/A";
     }
 
-    public int getAssessmentId() {
+    public Long getAssessmentId() {
         return assessmentId;
     }
-    public int getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
@@ -74,10 +74,10 @@ public class Assessment {
         return notes;
     }
 
-    public void setAssessmentId(int assessmentId) {
+    public void setAssessmentId(Long assessmentId) {
         this.assessmentId = assessmentId;
     }
-    public void setCourseId(int courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 

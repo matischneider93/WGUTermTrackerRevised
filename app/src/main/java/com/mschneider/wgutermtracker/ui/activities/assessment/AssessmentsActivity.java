@@ -45,7 +45,7 @@ public class AssessmentsActivity extends AppCompatActivity implements Assessment
 
         // Button Connections
         assessmentAddButton = findViewById(R.id.assessmentAddButton);
-        assessmentEditButton = findViewById(R.id.assessmentUpdateButton);
+        assessmentEditButton = findViewById(R.id.assessmentEditButton);
         assessmentDetailButton = findViewById(R.id.assessmentDetailButton);
         assessmentDeleteButton = findViewById(R.id.assessmentDeleteButton);
 
@@ -70,10 +70,10 @@ public class AssessmentsActivity extends AppCompatActivity implements Assessment
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AssessmentEditActivity.class);
-                intent.putExtra("assessment_id", assessments.get(selectedPosition).getAssessmentId());
-                intent.putExtra("assessment_type", assessments.get(selectedPosition).getAssessmentType());
-                intent.putExtra("due_date", assessments.get(selectedPosition).getDueDate());
-                intent.putExtra("notes", assessments.get(selectedPosition).getNotes());
+                intent.putExtra("assessment_id", assessmentList.get(selectedPosition).getAssessmentId());
+                intent.putExtra("assessment_type", assessmentList.get(selectedPosition).getAssessmentType());
+                intent.putExtra("due_date", assessmentList.get(selectedPosition).getDueDate());
+                intent.putExtra("notes", assessmentList.get(selectedPosition).getNotes());
                 startActivity(intent);
             }
         });
@@ -83,10 +83,10 @@ public class AssessmentsActivity extends AppCompatActivity implements Assessment
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AssessmentDetailActivity.class);
-                intent.putExtra("assessment_id", assessments.get(selectedPosition).getAssessmentId());
-                intent.putExtra("assessment_type", assessments.get(selectedPosition).getAssessmentType());
-                intent.putExtra("due_date", assessments.get(selectedPosition).getDueDate());
-                intent.putExtra("notes", assessments.get(selectedPosition).getNotes());
+                intent.putExtra("assessment_id", assessmentList.get(selectedPosition).getAssessmentId());
+                intent.putExtra("assessment_type", assessmentList.get(selectedPosition).getAssessmentType());
+                intent.putExtra("due_date", assessmentList.get(selectedPosition).getDueDate());
+                intent.putExtra("notes", assessmentList.get(selectedPosition).getNotes());
                 startActivity(intent);
             }
         });

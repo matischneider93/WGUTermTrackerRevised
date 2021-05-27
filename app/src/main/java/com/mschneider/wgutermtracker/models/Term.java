@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "terms")
 public class Term {
     @ColumnInfo(name = "termId")
-    @PrimaryKey(autoGenerate = true)
-    public int termId;
+    @PrimaryKey
+    public Long termId;
     @ColumnInfo(name = "title")
     public String title;
     @ColumnInfo(name = "start_date")
@@ -18,7 +18,7 @@ public class Term {
     public String endDate;
 
     @Ignore
-    public Term(int termId, String title, String startDate, String endDate) {
+    public Term(Long termId, String title, String startDate, String endDate) {
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
@@ -32,13 +32,13 @@ public class Term {
     }
 
     public Term() {
-        this.termId = 1;
+        this.termId = Long.valueOf(1);
         this.title = "test";
         this.startDate = "test";
         this.endDate = "N/A";
     }
 
-    public int getTermId() {
+    public Long getTermId() {
         return termId;
     }
     public String getTitle() {
@@ -51,7 +51,7 @@ public class Term {
         return endDate;
     }
 
-    public void setTermId(int termId) {
+    public void setTermId(Long termId) {
         this.termId = termId;
     }
     public void setTitle(String title) {

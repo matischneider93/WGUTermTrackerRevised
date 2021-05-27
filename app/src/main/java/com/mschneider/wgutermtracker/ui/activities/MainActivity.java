@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import com.mschneider.wgutermtracker.R;
 import com.mschneider.wgutermtracker.database.AppDatabase;
+import com.mschneider.wgutermtracker.models.Assessment;
+import com.mschneider.wgutermtracker.models.Course;
 import com.mschneider.wgutermtracker.models.Term;
 import com.mschneider.wgutermtracker.ui.activities.assessment.AssessmentsActivity;
 import com.mschneider.wgutermtracker.ui.activities.course.CoursesActivity;
@@ -37,8 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
         // when upgrading versions, kill the original tables by using fallbackToDestructiveMigration()
         appDatabase = AppDatabase.getDatabaseInstance(getApplicationContext());
-        appDatabase.termDao().insertTerm(new Term("Term 1", "05/29/21", "06/02/21"));
-        Log.d("Check", "Term Inserted");
+        appDatabase.termDao().deleteAllTerms();
+        appDatabase.termDao().insertTerm(new Term("Term A", "5/27/21", "5/31/21"));
+
+
+
+
+
+
+
 
 
 

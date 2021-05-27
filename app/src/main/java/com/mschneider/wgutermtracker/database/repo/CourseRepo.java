@@ -33,7 +33,7 @@ public class CourseRepo {
 
     }
 
-    public void deleteAllPatients(){
+    public void deleteAllCourses(){
         new DeleteAllCoursesAsyncTask(courseDao).execute();
 
     }
@@ -57,7 +57,7 @@ public class CourseRepo {
 
         @Override
         protected Void doInBackground(Course... courses) {
-            courseDao.insertCourses((List<Course>) courses[0]);
+
             return null;
         }
     }

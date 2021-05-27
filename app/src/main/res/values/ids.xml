@@ -73,7 +73,7 @@
     <item name="termTitleEditText" type="id" />
     <item name="termStartDateEditText" type="id" />
     <item name="termEndDateEditText" type="id" />
-    <item name="assessmentCourseIdEditText" type="id" />
+
     <item name="assessmentDueDateEditText" type="id" />
     <item name="assessmentCourseIdUpdateText" type="id" />
     <item name="addAssessmentButton" type="id" />
@@ -103,4 +103,8 @@
     <item name="courseEndDateDetailText" type="id" />
     <item name="courseStatusDetailText" type="id" />
     <item name="editAssessmentButton" type="id" />
+    <item name="assessmentEditButton" type="id" />
+    <item name="assessmentDueDateDetailText" type="id" />
+    <item name="assessmentNotesDetailText" type="id" />
+    <item name="courseSpinner" type="id" />
 </resources>

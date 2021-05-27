@@ -40,4 +40,8 @@ public interface CourseDao {
 
     @Query("DELETE FROM courses WHERE courseId = :selectedPosition")
     void deleteById(int selectedPosition);
+
+
+    @Query("SELECT * FROM courses WHERE termId = :termId")
+    List<Course> getCoursesByTermId(int termId);
 }

@@ -24,7 +24,7 @@ public class TermViewModel extends AndroidViewModel {
     }
 
 
-    public List<Term> getAllPhysicians() { return mAllTerms; }
+    public List<Term> getAllTerms() { return mAllTerms; }
 
     public void insert(Term term) { mRepository.insertTerm(term); }
 

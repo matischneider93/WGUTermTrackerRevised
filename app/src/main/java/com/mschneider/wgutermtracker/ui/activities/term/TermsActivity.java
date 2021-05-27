@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -59,10 +60,14 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
             termDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                  MainActivity.getAppDatabase().termDao().deleteById(selectedPosition);
-                  termsList.remove(selectedPosition);
-                  termsRecyclerView.getAdapter().notifyDataSetChanged();
-
+                    // TODO Validation for to check that term has no courses
+                    if (MainActivity.getAppDatabase().courseDao().getCoursesByTermId(selectedPosition).isEmpty()){
+                        termsList.remove(selectedPosition);
+                        termsRecyclerView.getAdapter().notifyDataSetChanged();
+                        MainActivity.getAppDatabase().termDao().deleteById(selectedPosition);
+                    } else {
+                        Log.d("Check", "Has courses. Delete courses & try again.");
+                    }
                 }
             });
 
@@ -83,7 +88,8 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TermDetailActivity.class);
-                intent.putExtra("termId", terms.get(selectedPosition).getTermId());
+                Log.d("Click", String.valueOf(terms.get(selectedPosition).getTermId()));
+
                 intent.putExtra("title", terms.get(selectedPosition).getTitle());
                 intent.putExtra("start_date", terms.get(selectedPosition).getStartDate());
                 intent.putExtra("end_date", terms.get(selectedPosition).getEndDate());

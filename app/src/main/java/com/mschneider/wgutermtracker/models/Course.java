@@ -3,6 +3,7 @@ package com.mschneider.wgutermtracker.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courses", foreignKeys = {@ForeignKey(entity = Term.class,
@@ -10,11 +11,12 @@ import androidx.room.PrimaryKey;
         childColumns = "courseId")
 })
 public class Course {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "courseId")
-    public int courseId;
+    public Long courseId;
+
     @ColumnInfo(name = "termId")
-    public int termId;
+    public Long termId;
     @ColumnInfo(name = "course_title")
     public String title;
     @ColumnInfo(name = "start_date")
@@ -32,9 +34,22 @@ public class Course {
     @ColumnInfo(name = "notes")
     public String notes;
 
-
-    public Course(int courseId, int termId, String title, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentor_email, String notes) {
+    @Ignore
+    public Course(Long courseId, Long termId, String title, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentor_email, String notes) {
         this.courseId = courseId;
+        this.termId = termId;
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.mentorName = mentorName;
+        this.mentorPhone = mentorPhone;
+        this.mentor_email = mentor_email;
+        this.notes = notes;
+    }
+
+
+    public Course(Long termId, String title, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentor_email, String notes) {
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
@@ -52,11 +67,11 @@ public class Course {
 
 
 
-    public int getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public int getTermId() {
+    public Long getTermId() {
         return termId;
     }
 
@@ -88,11 +103,11 @@ public class Course {
         return notes;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 
-    public void setTermId(int termId) {
+    public void setTermId(Long termId) {
         this.termId = termId;
     }
 

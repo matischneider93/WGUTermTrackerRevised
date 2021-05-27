@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.761" />
 
     <Button
-        android:id="@+id/assessmentUpdateButton"
+        android:id="@+id/assessmentEditButton"
         android:layout_width="107dp"
         android:layout_height="40dp"
         android:backgroundTint="#2196F3"

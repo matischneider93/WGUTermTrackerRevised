@@ -14,34 +14,33 @@ public class AssessmentDetailActivity extends AppCompatActivity {
     private TextView appointmentTitleDetailText;
     private TextView assessmentTypeDetailText;
     private TextView assessmentDueDateDetailText;
-    private TextView appointmentTimeDetailText;
 
+    private TextView assessmentNotesDetailText;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_detail);
-        appointmentTitleDetailText = findViewById(R.id.appointmentTitleDetailText);
-        assessmentTypeDetailText = findViewById(R.id.appointmentTypeDetailText);
-        assessmentDueDateDetailText = findViewById(R.id.appointmentDateDetailText);
-        appointmentTimeDetailText = findViewById(R.id.appointmentTimeDetailText);
+        assessmentTypeDetailText = findViewById(R.id.assessmentTypeDetailText);
+        assessmentDueDateDetailText = findViewById(R.id.assessmentDueDateDetailText);
+        assessmentNotesDetailText = findViewById(R.id.assessmentNotesDetailText);
 
-        Button appointmentsBackButton = findViewById(R.id.backAppointmentsButton);
+        Button assessmentsBackButton = findViewById(R.id.backAssessmentButton);
 
         Intent intent = getIntent();
-        String appointmentTitle = intent.getStringExtra("appointment_title");
+
         String assessmentType = intent.getStringExtra("assessment_type");
-        String appointmentDate = intent.getStringExtra("appointment_date");
-        String appointmentTime = intent.getStringExtra("appointment_time");
+        String assessmentDueDate = intent.getStringExtra("due_date");
+        String assessmentNotes = intent.getStringExtra("notes");
 
 
-        appointmentTitleDetailText.setText(appointmentTitle);
+
         assessmentTypeDetailText.setText(assessmentType);
-        assessmentDueDateDetailText.setText(appointmentDate);
-        appointmentTimeDetailText.setText(appointmentTime);
+        assessmentDueDateDetailText.setText(assessmentDueDate);
+        assessmentNotesDetailText.setText(assessmentNotes);
 
-        appointmentsBackButton.setOnClickListener(new View.OnClickListener() {
+        assessmentsBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AssessmentsActivity.class);

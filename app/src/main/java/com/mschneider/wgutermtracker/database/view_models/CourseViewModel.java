@@ -21,7 +21,7 @@ public class CourseViewModel extends AndroidViewModel {
         mAllCourses = mRepository.getAllCourses();
     }
 
-    List<Course> getAllPatients() { return mAllCourses; }
+    List<Course> getAllCourses() { return mAllCourses; }
 
     public void insert(Course course) { mRepository.insertCourse(course); }
 }

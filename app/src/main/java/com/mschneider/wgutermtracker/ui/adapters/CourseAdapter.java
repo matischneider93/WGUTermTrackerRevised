@@ -5,7 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Ignore;
 
 import com.mschneider.wgutermtracker.R;
 import com.mschneider.wgutermtracker.models.Course;
@@ -61,6 +63,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             this.onCourseClickListener = onCourseClickListener;
             view.setOnClickListener(this);
 
+        }
+
+
+        @Ignore
+        public ViewHolder(View itemView) {
+            super(itemView);
         }
 
         @Override

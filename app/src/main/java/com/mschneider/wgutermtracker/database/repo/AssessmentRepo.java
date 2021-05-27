@@ -44,7 +44,7 @@ public class AssessmentRepo {
         return allAssessments;
     }
 
-    public Assessment getAssessmentById(int assessmentId){
+    public Assessment getAssessmentById(Long assessmentId){
         return assessmentDao.getAssessmentById(assessmentId);
     }
 

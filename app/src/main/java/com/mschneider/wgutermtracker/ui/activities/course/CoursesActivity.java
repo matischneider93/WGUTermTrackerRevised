@@ -23,6 +23,7 @@ import java.util.List;
 public class CoursesActivity extends AppCompatActivity implements CourseAdapter.ViewHolder.OnCourseClickListener {
     private RecyclerView coursesRecyclerView;
     private List<Course> coursesList = new ArrayList<>();
+    private Button mainScreenButton;
     private Button courseAddButton;
     private Button courseEditButton;
     private Button courseDetailButton;
@@ -40,10 +41,6 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         coursesRecyclerView.setLayoutManager(layoutManager);
         coursesRecyclerView.setAdapter(new CourseAdapter(coursesList, this));
-
-        if (appDatabase.courseDao().getAllCourses().isEmpty()){
-            Log.d("Check", "Is Empty");
-        } else {
             courses = appDatabase.courseDao().getAllCourses();
             for (Course course : courses){ coursesList.add(course); }
             coursesRecyclerView = findViewById(R.id.coursesRecyclerView);
@@ -51,10 +48,11 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
             layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             coursesRecyclerView.setLayoutManager(layoutManager);
             coursesRecyclerView.setAdapter(new CourseAdapter(coursesList, this));
-        }
+
 
 
         // Button Connections
+        mainScreenButton = findViewById(R.id.mainScreenButton);
         courseAddButton = findViewById(R.id.courseAddButton);
         courseEditButton = findViewById(R.id.courseEditButton);
         courseDetailButton = findViewById(R.id.courseDetailButton);
@@ -63,7 +61,13 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
         courseAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), CourseAddActivity.class);
+                if (coursesList.size() > 0) {
+                    intent.putExtra("courseId", String.valueOf(coursesList.size() - 1));
+                } else {
+                    intent.putExtra("courseId", String.valueOf(coursesList.size()));
+                }
                 startActivity(intent);
             }
         });
@@ -114,8 +118,20 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
                 startActivity(intent);
             }
         });
+        mainScreenButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                startActivity(intent);
+            }
+        });
 
     }
+
+        // Back to main screen button
+
 
     @Override
     public void onCourseClick(int position) {

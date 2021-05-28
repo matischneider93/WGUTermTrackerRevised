@@ -24,6 +24,7 @@ import java.util.List;
 public class AssessmentsActivity extends AppCompatActivity implements AssessmentAdapter.ViewHolder.OnAssessmentClickListener {
     private RecyclerView assessmentsRecyclerView;
     private List<Assessment> assessmentList = new ArrayList<>();
+    private Button mainScreenButton;
     private Button assessmentAddButton;
     private Button assessmentEditButton;
     private Button assessmentDetailButton;
@@ -58,6 +59,7 @@ public class AssessmentsActivity extends AppCompatActivity implements Assessment
 
 
         // Button Connections
+        mainScreenButton = findViewById(R.id.mainScreenButton);
         assessmentAddButton = findViewById(R.id.assessmentAddButton);
         assessmentEditButton = findViewById(R.id.assessmentEditButton);
         assessmentDetailButton = findViewById(R.id.assessmentDetailButton);
@@ -102,6 +104,15 @@ public class AssessmentsActivity extends AppCompatActivity implements Assessment
                 intent.putExtra("assessment_type", assessmentList.get(selectedPosition).getAssessmentType());
                 intent.putExtra("due_date", assessmentList.get(selectedPosition).getDueDate());
                 intent.putExtra("notes", assessmentList.get(selectedPosition).getNotes());
+                startActivity(intent);
+            }
+        });
+
+
+        mainScreenButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });

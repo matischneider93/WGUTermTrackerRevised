@@ -8,67 +8,90 @@
     tools:context=".ui.activities.assessment.AssessmentsActivity">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/assessmentsRecyclerView"
-        android:layout_width="375dp"
-        android:layout_height="331dp"
-        android:background="#4D333638"
+    <Button
+        android:id="@+id/mainScreenButton"
+        android:layout_width="107dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="494dp"
+        android:layout_marginEnd="284dp"
+        android:layout_marginBottom="197dp"
+        android:backgroundTint="#2196F3"
+        android:text="Main "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.182" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/assessmentDeleteButton"
         android:layout_width="107dp"
         android:layout_height="40dp"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="566dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="125dp"
         android:backgroundTint="#2196F3"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/assessmentAddButton"
         android:layout_width="107dp"
         android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="566dp"
+        android:layout_marginEnd="288dp"
+        android:layout_marginBottom="125dp"
         android:backgroundTint="#2196F3"
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/assessmentEditButton"
         android:layout_width="107dp"
         android:layout_height="40dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="566dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginBottom="125dp"
         android:backgroundTint="#2196F3"
         android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/assessmentDetailButton"
         android:layout_width="107dp"
         android:layout_height="40dp"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="494dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="197dp"
         android:backgroundTint="#2196F3"
         android:text="Detail"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/assessmentsRecyclerView"
+        android:layout_width="375dp"
+        android:layout_height="331dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.69" />
+        app:layout_constraintVertical_bias="0.32" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

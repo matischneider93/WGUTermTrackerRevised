@@ -26,22 +26,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         Button termsButton, coursesButton, assessmentsButton;
-
         termsButton = (Button) findViewById(R.id.termsButton);
         coursesButton = (Button) findViewById(R.id.coursesButton);
         assessmentsButton = (Button) findViewById(R.id.assessmentsButton);
-
-
-
-
         // when upgrading versions, kill the original tables by using fallbackToDestructiveMigration()
         appDatabase = AppDatabase.getDatabaseInstance(getApplicationContext());
-
-
-
+        clearAppDatabases();
+        populateDatabases();
         termsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -3,6 +3,7 @@ package com.mschneider.wgutermtracker.ui.activities.course;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +31,8 @@ import java.util.Locale;
 import static com.mschneider.wgutermtracker.ui.activities.MainActivity.appDatabase;
 
 public class CourseAddActivity extends AppCompatActivity {
-    private Long  courseTermId;
+    private long  courseId;
+    private long  courseTermId;
     private EditText courseTitleEditText;
     private EditText courseStartDateEditText;
     private EditText courseEndDateEditText;
@@ -65,7 +67,7 @@ public class CourseAddActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String termId = parent.getItemAtPosition(position).toString();
-                courseTermId = Long.valueOf(termId);
+                courseTermId = Long.parseLong(termId);
 
             }
 
@@ -130,9 +132,15 @@ public class CourseAddActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Course newCourse = new Course(courseTermId, courseTitleEditText.getText().toString(), courseStartDateEditText.getText().toString(),courseEndDateEditText.getText().toString(), courseStatusEditText.getText().toString(), mentorNameEditText.getText().toString(), mentorPhoneEditText.getText().toString(), mentorEmailEditText.getText().toString(), courseNotesEditText.getText().toString());
-                MainActivity.getAppDatabase().courseDao().insertCourse(newCourse);
-                Intent intent = new Intent(getApplicationContext(), CoursesActivity.class);
+                Intent intent = getIntent();
+                String courseIdS = intent.getStringExtra("courseId");
+                Log.i("Check",  courseIdS);
+
+
+
+
+
+                intent = new Intent(getApplicationContext(), CoursesActivity.class);
                 startActivity(intent);
             }
         });

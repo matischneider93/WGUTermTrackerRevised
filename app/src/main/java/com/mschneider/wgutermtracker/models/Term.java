@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class Term {
     @ColumnInfo(name = "termId")
     @PrimaryKey
-    public Long termId;
+    public long termId;
     @ColumnInfo(name = "title")
     public String title;
     @ColumnInfo(name = "start_date")
@@ -18,7 +18,7 @@ public class Term {
     public String endDate;
 
     @Ignore
-    public Term(Long termId, String title, String startDate, String endDate) {
+    public Term(long termId, String title, String startDate, String endDate) {
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
@@ -38,7 +38,7 @@ public class Term {
         this.endDate = "N/A";
     }
 
-    public Long getTermId() {
+    public long getTermId() {
         return termId;
     }
     public String getTitle() {

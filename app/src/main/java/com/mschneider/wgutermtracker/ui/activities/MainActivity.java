@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         // when upgrading versions, kill the original tables by using fallbackToDestructiveMigration()
         appDatabase = AppDatabase.getDatabaseInstance(getApplicationContext());
-        clearAppDatabases();
-        populateDatabases();
+
+
 
         termsButton.setOnClickListener(new View.OnClickListener() {
             @Override

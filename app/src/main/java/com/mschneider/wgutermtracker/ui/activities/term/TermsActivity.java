@@ -26,6 +26,7 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
     private Button termEditButton;
     private Button termDetailButton;
     private Button termDeleteButton;
+    private Button mainScreenButton;
     private int selectedPosition;
 
 
@@ -49,6 +50,7 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
             termEditButton = findViewById(R.id.termEditButton);
             termDetailButton = findViewById(R.id.termDetailButton);
             termDeleteButton = findViewById(R.id.termDeleteButton);
+            mainScreenButton = findViewById(R.id.mainScreenButton);
 
             termAddButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -65,6 +67,7 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
                         termsList.remove(selectedPosition);
                         termsRecyclerView.getAdapter().notifyDataSetChanged();
                         MainActivity.getAppDatabase().termDao().deleteById(selectedPosition);
+
                     } else {
                         Log.d("Check", "Has courses. Delete courses & try again.");
                     }
@@ -97,7 +100,20 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
             }
         });
 
+        // Back to main screen button
+        mainScreenButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         }
+
+
+
 
 
     @Override

@@ -9,9 +9,9 @@ import androidx.room.PrimaryKey;
 public class Assessment {
     @ColumnInfo(name = "assessment_id")
     @PrimaryKey
-    private Long assessmentId;
+    private long assessmentId;
     @ColumnInfo(name = "course_Id")
-    private Long courseId;
+    private long courseId;
     @ColumnInfo(name = "assessment_type")
     private String assessmentType;
     @ColumnInfo(name = "due_date")
@@ -22,7 +22,7 @@ public class Assessment {
 
 
     @Ignore
-    public Assessment(Long assessmentId, Long courseId, String assessmentType, String dueDate, String notes) {
+    public Assessment(long assessmentId, long courseId, String assessmentType, String dueDate, String notes) {
         this.assessmentId = assessmentId;
         this.courseId = courseId;
         this.assessmentType = assessmentType;
@@ -30,7 +30,7 @@ public class Assessment {
         this.notes = notes;
     }
     @Ignore
-    public Assessment(Long courseId, String assessmentType, String dueDate, String notes) {
+    public Assessment(long courseId, String assessmentType, String dueDate, String notes) {
         this.courseId = courseId;
         this.assessmentType = assessmentType;
         this.dueDate = dueDate;
@@ -50,17 +50,17 @@ public class Assessment {
 
 
     public Assessment() {
-        this.assessmentId = Long.valueOf(1);
-        this.courseId = Long.valueOf(1);
+        this.assessmentId = 1;
+        this.courseId = 1;
         this.assessmentType = "N/A";
         this.dueDate = "N/A";
         this.notes = "N/A";
     }
 
-    public Long getAssessmentId() {
+    public long getAssessmentId() {
         return assessmentId;
     }
-    public Long getCourseId() {
+    public long getCourseId() {
         return courseId;
     }
 
@@ -74,10 +74,10 @@ public class Assessment {
         return notes;
     }
 
-    public void setAssessmentId(Long assessmentId) {
+    public void setAssessmentId(long assessmentId) {
         this.assessmentId = assessmentId;
     }
-    public void setCourseId(Long courseId) {
+    public void setCourseId(long courseId) {
         this.courseId = courseId;
     }
 

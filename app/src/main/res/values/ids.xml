@@ -107,4 +107,5 @@
     <item name="assessmentDueDateDetailText" type="id" />
     <item name="assessmentNotesDetailText" type="id" />
     <item name="courseSpinner" type="id" />
+    <item name="mainScreenButton" type="id" />
 </resources>

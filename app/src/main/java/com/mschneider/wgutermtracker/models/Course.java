@@ -13,10 +13,9 @@ import androidx.room.PrimaryKey;
 public class Course {
     @PrimaryKey
     @ColumnInfo(name = "courseId")
-    public Long courseId;
-
+    public long courseId;
     @ColumnInfo(name = "termId")
-    public Long termId;
+    public long termId;
     @ColumnInfo(name = "course_title")
     public String title;
     @ColumnInfo(name = "start_date")
@@ -35,7 +34,7 @@ public class Course {
     public String notes;
 
     @Ignore
-    public Course(Long courseId, Long termId, String title, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentor_email, String notes) {
+    public Course(long courseId, long termId, String title, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentor_email, String notes) {
         this.courseId = courseId;
         this.termId = termId;
         this.title = title;
@@ -49,7 +48,7 @@ public class Course {
     }
 
 
-    public Course(Long termId, String title, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentor_email, String notes) {
+    public Course(long termId, String title, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentor_email, String notes) {
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
@@ -67,11 +66,11 @@ public class Course {
 
 
 
-    public Long getCourseId() {
+    public long getCourseId() {
         return courseId;
     }
 
-    public Long getTermId() {
+    public long getTermId() {
         return termId;
     }
 
@@ -103,11 +102,11 @@ public class Course {
         return notes;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(long courseId) {
         this.courseId = courseId;
     }
 
-    public void setTermId(Long termId) {
+    public void setTermId(long termId) {
         this.termId = termId;
     }
 

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mschneider.wgutermtracker.R;
+import com.mschneider.wgutermtracker.database.AppDatabase;
 import com.mschneider.wgutermtracker.models.Term;
 import com.mschneider.wgutermtracker.ui.activities.MainActivity;
 
@@ -35,7 +36,8 @@ public class TermEditActivity extends AppCompatActivity {
         termEditButton = findViewById(R.id.editTermButton);
 
         Intent intent = getIntent();
-        String termId = intent.getStringExtra("termId");
+        String termIdS = intent.getStringExtra("termId");
+
         String title = intent.getStringExtra("title");
         String startDate = intent.getStringExtra("start_date");
         String endDate = intent.getStringExtra("end_date");
@@ -82,6 +84,9 @@ public class TermEditActivity extends AppCompatActivity {
         termEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Term term = new Term(0, termTitleEditText.getText().toString(), termStartDateEditText.getText().toString(), termEndDateEditText.getText().toString());
+                MainActivity.getAppDatabase().termDao().updateTerm(term);
                     Intent intent = new Intent(getApplicationContext(), TermsActivity.class);
                     startActivity(intent);
                 }

@@ -35,21 +35,18 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
         AppDatabase appDatabase = MainActivity.getAppDatabase();
-        List<Course> courses = null;
+        List<Course> courses = appDatabase.courseDao().getAllCourses();
+        if (courses.isEmpty() || courses == null){ Log.d("Check", "Courses is empty");}
+        for (Course course : courses){ coursesList.add(course); }
         coursesRecyclerView = findViewById(R.id.coursesRecyclerView);
         coursesRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         coursesRecyclerView.setLayoutManager(layoutManager);
         coursesRecyclerView.setAdapter(new CourseAdapter(coursesList, this));
-            courses = appDatabase.courseDao().getAllCourses();
-            for (Course course : courses){ coursesList.add(course); }
-            coursesRecyclerView = findViewById(R.id.coursesRecyclerView);
-            coursesRecyclerView.setHasFixedSize(true);
-            layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-            coursesRecyclerView.setLayoutManager(layoutManager);
-            coursesRecyclerView.setAdapter(new CourseAdapter(coursesList, this));
-
-
+        coursesRecyclerView = findViewById(R.id.coursesRecyclerView);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        coursesRecyclerView.setLayoutManager(layoutManager);
+        coursesRecyclerView.setAdapter(new CourseAdapter(coursesList, this));
 
         // Button Connections
         mainScreenButton = findViewById(R.id.mainScreenButton);
@@ -63,16 +60,10 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(), CourseAddActivity.class);
-                    //TODO fix
-                    if (coursesList.size() >= 0){
-                        intent.putExtra("courseId", String.valueOf(coursesList.size() + 1));
-                    } else {
-                        intent.putExtra("courseId", String.valueOf(coursesList.size()));
-                    }
-
-
-
-
+                if (!courses.isEmpty()) {
+                    Log.d("Check", "Courses not empty");
+                    intent.putExtra("courseId", (long) coursesList.size() + 1);
+                }
                 startActivity(intent);
             }
         });
@@ -91,8 +82,8 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(), CourseEditActivity.class);
-                intent.putExtra("courseId", coursesList.get(selectedPosition).getCourseId());
-                intent.putExtra("termId", coursesList.get(selectedPosition).getTermId());
+                intent.putExtra("courseId", (long) coursesList.get(selectedPosition).getCourseId());
+                intent.putExtra("termId", (long) coursesList.get(selectedPosition).getTermId());
                 intent.putExtra("title", coursesList.get(selectedPosition).getTitle());
                 intent.putExtra("status", coursesList.get(selectedPosition).getStatus());
                 intent.putExtra("start_date", coursesList.get(selectedPosition).getStartDate());
@@ -110,8 +101,8 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
-                intent.putExtra("courseId", coursesList.get(selectedPosition).getCourseId());
-                intent.putExtra("termId", coursesList.get(selectedPosition).getTermId());
+                intent.putExtra("courseId", (long) coursesList.get(selectedPosition).getCourseId());
+                intent.putExtra("termId", (long) coursesList.get(selectedPosition).getTermId());
                 intent.putExtra("title", coursesList.get(selectedPosition).getTitle());
                 intent.putExtra("status", coursesList.get(selectedPosition).getStatus());
                 intent.putExtra("start_date", coursesList.get(selectedPosition).getStartDate());
@@ -126,9 +117,7 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
         mainScreenButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
                 startActivity(intent);
             }
         });

@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class TermEditActivity extends AppCompatActivity {
+    private long termId;
     private EditText termTitleEditText;
     private EditText termStartDateEditText;
     private EditText termEndDateEditText;
@@ -36,8 +37,8 @@ public class TermEditActivity extends AppCompatActivity {
         termEditButton = findViewById(R.id.editTermButton);
 
         Intent intent = getIntent();
-        String termIdS = intent.getStringExtra("termId");
-
+        termId = intent.getLongExtra("termId",1);
+        Log.d("Check", String.valueOf(termId));
         String title = intent.getStringExtra("title");
         String startDate = intent.getStringExtra("start_date");
         String endDate = intent.getStringExtra("end_date");
@@ -85,7 +86,7 @@ public class TermEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Term term = new Term(0, termTitleEditText.getText().toString(), termStartDateEditText.getText().toString(), termEndDateEditText.getText().toString());
+                Term term = new Term(termId, termTitleEditText.getText().toString(), termStartDateEditText.getText().toString(), termEndDateEditText.getText().toString());
                 MainActivity.getAppDatabase().termDao().updateTerm(term);
                     Intent intent = new Intent(getApplicationContext(), TermsActivity.class);
                     startActivity(intent);

@@ -86,7 +86,7 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TermEditActivity.class);
-                intent.putExtra("termId", terms.get(selectedPosition).getTermId());
+                intent.putExtra("termId", (long) terms.get(selectedPosition).getTermId());
                 intent.putExtra("title", terms.get(selectedPosition).getTitle());
                 intent.putExtra("start_date", terms.get(selectedPosition).getStartDate());
                 intent.putExtra("end_date", terms.get(selectedPosition).getEndDate());

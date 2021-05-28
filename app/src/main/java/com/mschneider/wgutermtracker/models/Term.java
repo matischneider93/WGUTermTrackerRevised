@@ -24,7 +24,7 @@ public class Term {
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    @Ignore
+
     public Term(String title, String startDate, String endDate) {
         this.title = title;
         this.startDate = startDate;
@@ -32,7 +32,7 @@ public class Term {
     }
 
     public Term() {
-        this.termId = Long.valueOf(1);
+        this.termId = 1;
         this.title = "test";
         this.startDate = "test";
         this.endDate = "N/A";

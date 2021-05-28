@@ -37,6 +37,8 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
             setContentView(R.layout.activity_terms);
             AppDatabase appDatabase = MainActivity.getAppDatabase();
             List<Term> terms = appDatabase.termDao().getAllTerms();
+            if (terms.isEmpty()){ Log.d("Check", "Terms is empty"); }
+
             for (Term term : terms){ termsList.add(term); }
 
             termsRecyclerView = findViewById(R.id.termsRecyclerView);
@@ -56,6 +58,12 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), TermAddActivity.class);
+                    if (!terms.isEmpty()) {
+                        Log.d("Check", "Terms not empty");
+                        intent.putExtra("termId", (long) termsList.size() + 1);
+
+                    }
+
                     startActivity(intent);
                 }
             });

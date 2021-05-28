@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import static com.mschneider.wgutermtracker.ui.activities.MainActivity.*;
 import static com.mschneider.wgutermtracker.ui.activities.MainActivity.appDatabase;
 
 public class CourseAddActivity extends AppCompatActivity {
@@ -68,6 +69,7 @@ public class CourseAddActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String termId = parent.getItemAtPosition(position).toString();
                 courseTermId = Long.parseLong(termId);
+                courseTermId = 1;
 
             }
 
@@ -134,12 +136,10 @@ public class CourseAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = getIntent();
                 String courseIdS = intent.getStringExtra("courseId");
-                Log.i("Check",  courseIdS);
-
-
-
-
-
+                courseId = Long.parseLong(courseIdS);
+                Course newCourse = new Course(courseId,courseTermId,courseTitleEditText.getText().toString(),courseStartDateEditText.getText().toString(), courseEndDateEditText.getText().toString(),courseStatusEditText.getText().toString(), mentorNameEditText.getText().toString(), mentorPhoneEditText.getText().toString(), mentorEmailEditText.getText().toString(), courseNotesEditText.getText().toString());
+                getAppDatabase().courseDao().insertCourse(newCourse);
+                Log.i("Check", "Inserted Course");
                 intent = new Intent(getApplicationContext(), CoursesActivity.class);
                 startActivity(intent);
             }

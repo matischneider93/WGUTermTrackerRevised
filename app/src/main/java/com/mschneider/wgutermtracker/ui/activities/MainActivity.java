@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // when upgrading versions, kill the original tables by using fallbackToDestructiveMigration()
         appDatabase = AppDatabase.getDatabaseInstance(getApplicationContext());
         clearAppDatabases();
-        populateDatabases();
+        appDatabase.termDao().insertTerm(new Term(1, "Term A","06/01/2021", "06/30/2021"));
         termsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,9 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void populateDatabases() {
-        appDatabase.termDao().insertTerm(new Term( "Term A","06/01/2021", "06/30/2021"));
-        appDatabase.courseDao().insertCourse(new Course((long) 1,"Course A","06/01/2021", "06/30/2021", "Upcoming", "Barb Gilbert", "134253", "barb@gilbert.com", "n/a"));
-        appDatabase.assessmentDao().insertAssessment(new Assessment( (long) 1, (long) 1, "Objective","06/01/2021", "N/A" ));
+        appDatabase.termDao().insertTerm(new Term( 1, "Term A","06/01/2021", "06/30/2021"));
+        appDatabase.courseDao().insertCourse(new Course(1,1,"Course A","06/01/2021", "06/30/2021", "Upcoming", "Barb Gilbert", "134253", "barb@gilbert.com", "n/a"));
+        appDatabase.assessmentDao().insertAssessment(new Assessment(1, 1, "Objective","06/01/2021", "N/A" ));
+
+
+
+
     }
 
     public static AppDatabase getAppDatabase() {

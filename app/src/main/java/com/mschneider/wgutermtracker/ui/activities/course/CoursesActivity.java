@@ -63,11 +63,16 @@ public class CoursesActivity extends AppCompatActivity implements CourseAdapter.
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(), CourseAddActivity.class);
-                if (coursesList.size() > 0) {
-                    intent.putExtra("courseId", String.valueOf(coursesList.size() - 1));
-                } else {
-                    intent.putExtra("courseId", String.valueOf(coursesList.size()));
-                }
+                    //TODO fix
+                    if (coursesList.size() >= 0){
+                        intent.putExtra("courseId", String.valueOf(coursesList.size() + 1));
+                    } else {
+                        intent.putExtra("courseId", String.valueOf(coursesList.size()));
+                    }
+
+
+
+
                 startActivity(intent);
             }
         });

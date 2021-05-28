@@ -3,6 +3,7 @@ package com.mschneider.wgutermtracker.ui.activities.term;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,6 +20,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class TermAddActivity extends AppCompatActivity {
+    private long termId;
     private EditText termTitleEditText;
     private EditText termStartDateEditText;
     private EditText termEndDateEditText;
@@ -29,12 +31,16 @@ public class TermAddActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_add);
         termTitleEditText = findViewById(R.id.termTitleEditText);
         termStartDateEditText = findViewById(R.id.termStartDateEditText);
         termEndDateEditText = findViewById(R.id.termEndDateEditText);
         termAddButton = findViewById(R.id.addTermButton);
+        Intent intent = getIntent();
+        termId = intent.getLongExtra("termId", 0);
+        Log.d("Check", String.valueOf(termId));
 
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -74,9 +80,10 @@ public class TermAddActivity extends AppCompatActivity {
         termAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Term term = new Term(termTitleEditText.getText().toString(), termStartDateEditText.getText().toString(), termEndDateEditText.getText().toString());
-                MainActivity.getAppDatabase().termDao().insertTerm(term);
                 Intent intent = new Intent(getApplicationContext(), TermsActivity.class);
+
+                Term term = new Term(TermAddActivity.this.termId, termTitleEditText.getText().toString(), termStartDateEditText.getText().toString(), termEndDateEditText.getText().toString());
+                MainActivity.getAppDatabase().termDao().insertTerm(term);
                 startActivity(intent);
             }
         });

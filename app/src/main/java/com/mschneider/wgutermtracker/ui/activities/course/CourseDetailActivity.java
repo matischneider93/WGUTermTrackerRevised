@@ -1,10 +1,13 @@
 package com.mschneider.wgutermtracker.ui.activities.course;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,6 +53,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         courseNotesDetailText = findViewById(R.id.courseNotesDetailText);
         ascAssessmentRecyclerView = findViewById(R.id.ascAssessmentRecyclerView);
         Button coursesBackButton = findViewById(R.id.coursesBackButton);
+        Button emailCourseNotesButton = findViewById(R.id.emailCourseNotesButton);
 
 
 
@@ -85,6 +89,23 @@ public class CourseDetailActivity extends AppCompatActivity {
         courseMentorNameDetailText.setText(mentorName);
         courseMentorEmailDetailText.setText(mentorEmail);
         courseNotesDetailText.setText(notes);
+
+        emailCourseNotesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mailto = "mailto:useremail@gmail.com" +
+                        "?cc=" +
+                        "&subject=" + Uri.encode("Assessment Notes") +
+                        "&body=" + Uri.encode(notes);
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse(mailto));
+                try {
+                    startActivity(emailIntent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(getApplicationContext(), "Error opening email app", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         coursesBackButton.setOnClickListener(new View.OnClickListener() {
             @Override

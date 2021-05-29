@@ -87,6 +87,7 @@ public class AssessmentsActivity extends AppCompatActivity implements Assessment
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AssessmentEditActivity.class);
                 intent.putExtra("assessment_id", assessmentList.get(selectedPosition).getAssessmentId());
+                intent.putExtra("course_id", assessmentList.get(selectedPosition).getCourseId());
                 intent.putExtra("assessment_type", assessmentList.get(selectedPosition).getAssessmentType());
                 intent.putExtra("due_date", assessmentList.get(selectedPosition).getDueDate());
                 intent.putExtra("notes", assessmentList.get(selectedPosition).getNotes());

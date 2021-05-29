@@ -71,14 +71,12 @@ public class TermsActivity extends AppCompatActivity implements TermAdapter.View
                 @Override
                 public void onClick(View v) {
                     // TODO Validation for to check that term has no courses
-                    if (MainActivity.getAppDatabase().courseDao().getCoursesByTermId(selectedPosition).isEmpty()){
-                        termsList.remove(selectedPosition);
-                        termsRecyclerView.getAdapter().notifyDataSetChanged();
-                        MainActivity.getAppDatabase().termDao().deleteById(selectedPosition);
+                    termsList.remove(selectedPosition);
+                    termsRecyclerView.getAdapter().notifyDataSetChanged();
+                    MainActivity.getAppDatabase().termDao().deleteById(selectedPosition);
 
-                    } else {
-                        Log.d("Check", "Has courses. Delete courses & try again.");
-                    }
+
+
                 }
             });
 

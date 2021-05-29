@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // when upgrading versions, kill the original tables by using fallbackToDestructiveMigration()
         appDatabase = AppDatabase.getDatabaseInstance(getApplicationContext());
         clearAppDatabases();
-        appDatabase.termDao().insertTerm(new Term(1, "Term A","06/01/2021", "06/30/2021"));
+        populateDatabases();
         termsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

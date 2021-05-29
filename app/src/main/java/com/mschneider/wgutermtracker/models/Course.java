@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courses", foreignKeys = {@ForeignKey(entity = Term.class,
         parentColumns = "termId",
-        childColumns = "courseId")
+        childColumns = "termId")
 })
 public class Course {
     @PrimaryKey
@@ -33,7 +33,7 @@ public class Course {
     @ColumnInfo(name = "notes")
     public String notes;
 
-    @Ignore
+
     public Course(long courseId, long termId, String title, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentor_email, String notes) {
         this.courseId = courseId;
         this.termId = termId;
@@ -48,17 +48,7 @@ public class Course {
     }
 
 
-    public Course(long termId, String title, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentor_email, String notes) {
-        this.termId = termId;
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.mentorName = mentorName;
-        this.mentorPhone = mentorPhone;
-        this.mentor_email = mentor_email;
-        this.notes = notes;
-    }
+
 
     public String getTitle() {
         return title;

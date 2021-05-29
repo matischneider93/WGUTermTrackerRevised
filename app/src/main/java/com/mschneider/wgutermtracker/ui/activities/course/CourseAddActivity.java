@@ -32,7 +32,7 @@ import static com.mschneider.wgutermtracker.ui.activities.MainActivity.*;
 import static com.mschneider.wgutermtracker.ui.activities.MainActivity.appDatabase;
 
 public class CourseAddActivity extends AppCompatActivity {
-    private long  courseId;
+    private long courseId;
     private long  courseTermId;
     private EditText courseTitleEditText;
     private EditText courseStartDateEditText;
@@ -52,33 +52,6 @@ public class CourseAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_add);
         Spinner spinner = findViewById(R.id.termSpinner);
-        List<Term> terms = appDatabase.termDao().getAllTerms();
-        List<Term> termsList = new ArrayList<>();
-        for (Term term : terms) {
-            termsList.add(term);
-        }
-        ArrayList<String> arrayList = new ArrayList<>();
-        for (Term term : termsList) {
-            arrayList.add(String.valueOf(term.getTermId()));
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String termId = parent.getItemAtPosition(position).toString();
-                courseTermId = Long.parseLong(termId);
-                courseTermId = 1;
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                courseTermId = Long.valueOf(1);
-            }
-        });
-
         courseTitleEditText = findViewById(R.id.courseTitleEditText);
         courseStartDateEditText = findViewById(R.id.courseStartDateEditText);
         courseEndDateEditText = findViewById(R.id.courseEndDateEditText);
@@ -89,6 +62,30 @@ public class CourseAddActivity extends AppCompatActivity {
         courseNotesEditText = findViewById(R.id.courseNotesEditText);
         addCourseButton = findViewById(R.id.addCourseButton);
         coursesBackButton = findViewById(R.id.coursesBackButton); // leads to main patient screen
+
+        Intent intent = getIntent();
+        courseId = intent.getLongExtra("courseId", 1);
+        Log.d("Check", String.valueOf(courseId));
+        List<Term> terms = appDatabase.termDao().getAllTerms();
+        List<Term> termsList = new ArrayList<>();
+        for (Term term : terms) { termsList.add(term); }
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (Term term : termsList) { arrayList.add(String.valueOf(term.getTermId())); }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String termId = parent.getItemAtPosition(position).toString();
+                courseTermId = Long.parseLong(termId);
+            }
+;
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                courseTermId = 1;
+            }
+        });
 
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -101,11 +98,7 @@ public class CourseAddActivity extends AppCompatActivity {
                 } else if (courseEndDateEditText.hasFocus()){
                     updateEndDate();
                 }
-
-
             }
-
-
         };
 
         courseStartDateEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -134,13 +127,9 @@ public class CourseAddActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = getIntent();
-                String courseIdS = intent.getStringExtra("courseId");
-                courseId = Long.parseLong(courseIdS);
-                Course newCourse = new Course(courseId,courseTermId,courseTitleEditText.getText().toString(),courseStartDateEditText.getText().toString(), courseEndDateEditText.getText().toString(),courseStatusEditText.getText().toString(), mentorNameEditText.getText().toString(), mentorPhoneEditText.getText().toString(), mentorEmailEditText.getText().toString(), courseNotesEditText.getText().toString());
-                getAppDatabase().courseDao().insertCourse(newCourse);
-                Log.i("Check", "Inserted Course");
-                intent = new Intent(getApplicationContext(), CoursesActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CoursesActivity.class);
+                Course course = new Course(courseId,courseTermId, courseTitleEditText.getText().toString(), courseStartDateEditText.getText().toString(), courseEndDateEditText.getText().toString(), courseStatusEditText.getText().toString(), mentorNameEditText.getText().toString(),mentorPhoneEditText.getText().toString(), mentorEmailEditText.getText().toString(), courseNotesEditText.getText().toString());
+                MainActivity.getAppDatabase().courseDao().insertCourse(course);
                 startActivity(intent);
             }
         });
@@ -156,19 +145,6 @@ public class CourseAddActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void updateStartDate(){
         String myFormat = "MM/dd/yy"; //In which you need put here

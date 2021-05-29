@@ -2,15 +2,18 @@ package com.mschneider.wgutermtracker.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "assessments")
+@Entity(tableName = "assessments", foreignKeys = {@ForeignKey(entity = Course.class,
+        parentColumns = "courseId",
+        childColumns = "courseId")})
 public class Assessment {
     @ColumnInfo(name = "assessment_id")
     @PrimaryKey
     private long assessmentId;
-    @ColumnInfo(name = "course_Id")
+    @ColumnInfo(name = "courseId")
     private long courseId;
     @ColumnInfo(name = "assessment_type")
     private String assessmentType;
